@@ -14,6 +14,7 @@
 #include <esp_idf_lib_helpers.h>
 #include "i2cdev.h"
 
+
 static const char *TAG = "I2C_DEV";
 
 typedef struct {
@@ -21,6 +22,8 @@ typedef struct {
     i2c_config_t config;
     bool installed;
 } i2c_port_state_t;
+
+
 
 static i2c_port_state_t states[I2C_NUM_MAX];
 
