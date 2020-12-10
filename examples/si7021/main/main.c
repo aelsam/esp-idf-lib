@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -6,20 +7,14 @@
 
 #define CHIP_TYPE_SI70xx  // comment this line for SHT2x/HTU21D
 
-#if defined(CONFIG_IDF_TARGET_ESP8266)
-#define SDA_GPIO 4
-#define SCL_GPIO 5
-#else
 #define SDA_GPIO 16
 #define SCL_GPIO 17
-#endif
 
-#if defined(CONFIG_IDF_TARGET_ESP32S2)
-#define APP_CPU_NUM PRO_CPU_NUM
-#endif
+
 
 void task(void *pvParamters)
 {
+    printf("Starting Task");
     i2c_dev_t dev;
     memset(&dev, 0, sizeof(i2c_dev_t));
 
@@ -80,7 +75,10 @@ void task(void *pvParamters)
 
 void app_main()
 {
+    printf("Very Beginning");
     ESP_ERROR_CHECK(i2cdev_init());
-
-    xTaskCreatePinnedToCore(task, "test", configMINIMAL_STACK_SIZE * 8, NULL, 5, NULL, APP_CPU_NUM);
+    printf("Starting task Outside");
+    xTaskCreate(task, "test", configMINIMAL_STACK_SIZE*8,
+                NULL, 5, NULL);
+//    xTaskCreatePinnedToCore(task, "test", configMINIMAL_STACK_SIZE * 8, NULL, 5, NULL, 0);
 }

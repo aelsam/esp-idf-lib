@@ -39,8 +39,19 @@ static const int RX_BUF_SIZE = 128;
 
 // Setup UART pins
 //S1
-#define TXD_PIN (GPIO_NUM_26)
-#define RXD_PIN (GPIO_NUM_27)
+// VUL100
+//#define TXD_PIN (GPIO_NUM_26)
+//#define RXD_PIN (GPIO_NUM_27)
+// VLS100
+//#define TXD_PIN (GPIO_NUM_14)
+//#define RXD_PIN (GPIO_NUM_27)
+
+
+//#define I2C_MASTER_SDA_GPIO         CONFIG_SDA_GPIO
+//#define I2C_MASTER_SCL_GPIO         CONFIG_SCL_GPIO
+#define TXD_PIN     CONFIG_TX_GPIO
+#define RXD_PIN     CONFIG_RX_GPIO
+
 
 //S2
 //#define TXD_PIN (GPIO_NUM_18)
@@ -1050,9 +1061,9 @@ void HLW8110_Measure(cJSON *metering_data)
     Read_HLW8110_U();
   //  Read_HLW8110_LineFreq(); 
 
-//    Read_HLW8110_IA();
-    Read_HLW8110_PA();
-    Read_HLW8110_EA();
+    Read_HLW8110_IA();
+//    Read_HLW8110_PA();
+//    Read_HLW8110_EA();
 
 //    F_Angle_A=Read_HLW8110_Angle();
 //    F_PowerFactor_A=Read_HLW8110_PF();
@@ -1067,12 +1078,12 @@ void HLW8110_Measure(cJSON *metering_data)
 //    cJSON_SetNumberValue(item_lv1,U16_AC_LINE_Freq);
 
     item_lv1 = cJSON_GetObjectItem(metering_data,"ChA");
-//    item_lv2 = cJSON_GetObjectItem(item_lv1,"A");
-//    cJSON_SetNumberValue(item_lv2,U32_AC_I_A);
-    item_lv2 = cJSON_GetObjectItem(item_lv1,"W");
-    cJSON_SetNumberValue(item_lv2,U32_AC_P_A);
-    item_lv2 = cJSON_GetObjectItem(item_lv1,"kWH");
-    cJSON_SetNumberValue(item_lv2,U32_AC_E_A);
+    item_lv2 = cJSON_GetObjectItem(item_lv1,"A");
+    cJSON_SetNumberValue(item_lv2,U32_AC_I_A);
+//    item_lv2 = cJSON_GetObjectItem(item_lv1,"W");
+//    cJSON_SetNumberValue(item_lv2,U32_AC_P_A);
+//    item_lv2 = cJSON_GetObjectItem(item_lv1,"kWH");
+//    cJSON_SetNumberValue(item_lv2,U32_AC_E_A);
 //    item_lv2 = cJSON_GetObjectItem(item_lv1,"PF");
 //    cJSON_SetNumberValue(item_lv2,F_PowerFactor_A);
 //    item_lv2 = cJSON_GetObjectItem(item_lv1,"Ang");
