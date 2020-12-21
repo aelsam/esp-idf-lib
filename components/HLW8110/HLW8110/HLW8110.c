@@ -61,7 +61,7 @@ static const int RX_BUF_SIZE = 128;
 #define UART_TASK_STACKSIZE 4 * 1024
 #define UART_TASK_NAME      "UARTRX"
 
-#define METERING_LOGGING  0
+#define METERING_LOGGING 0
 
 
 int64_t realtime_timer_durations_ms;
@@ -622,7 +622,7 @@ void Read_HLW8110_IA(void)
 { 
     float a=0;
     Uart_Read_HLW8110_Reg(REG_RMSIA_ADDR,3);
-    vTaskDelay(20 / portTICK_PERIOD_MS);
+    vTaskDelay(50 / portTICK_PERIOD_MS);
     if ( u8_RxBuf[u8_RX_Length-1] == HLW8110_checkSum_Read(u8_RX_Length) )
     {
         U32_RMSIA_RegData = (u8_RxBuf[0]<<16) + (u8_RxBuf[1]<<8) + (u8_RxBuf[2]); 
@@ -658,7 +658,7 @@ void Read_HLW8110_U(void)
     float a=0;
     Uart_Read_HLW8110_Reg(REG_RMSU_ADDR,3);
 
-    vTaskDelay(20 / portTICK_PERIOD_MS);
+    vTaskDelay(50 / portTICK_PERIOD_MS);
     if ( u8_RxBuf[u8_RX_Length-1] == HLW8110_checkSum_Read(u8_RX_Length) )
     {
         U32_RMSU_RegData = (u8_RxBuf[0]<<16) + (u8_RxBuf[1]<<8) + (u8_RxBuf[2]);
@@ -1062,8 +1062,8 @@ void HLW8110_Measure(cJSON *metering_data)
   //  Read_HLW8110_LineFreq(); 
 
     Read_HLW8110_IA();
-//    Read_HLW8110_PA();
-//    Read_HLW8110_EA();
+    Read_HLW8110_PA();
+    Read_HLW8110_EA();
 
 //    F_Angle_A=Read_HLW8110_Angle();
 //    F_PowerFactor_A=Read_HLW8110_PF();
@@ -1080,10 +1080,10 @@ void HLW8110_Measure(cJSON *metering_data)
     item_lv1 = cJSON_GetObjectItem(metering_data,"ChA");
     item_lv2 = cJSON_GetObjectItem(item_lv1,"A");
     cJSON_SetNumberValue(item_lv2,U32_AC_I_A);
-//    item_lv2 = cJSON_GetObjectItem(item_lv1,"W");
-//    cJSON_SetNumberValue(item_lv2,U32_AC_P_A);
-//    item_lv2 = cJSON_GetObjectItem(item_lv1,"kWH");
-//    cJSON_SetNumberValue(item_lv2,U32_AC_E_A);
+    item_lv2 = cJSON_GetObjectItem(item_lv1,"W");
+    cJSON_SetNumberValue(item_lv2,U32_AC_P_A);
+    item_lv2 = cJSON_GetObjectItem(item_lv1,"kWH");
+    cJSON_SetNumberValue(item_lv2,U32_AC_E_A);
 //    item_lv2 = cJSON_GetObjectItem(item_lv1,"PF");
 //    cJSON_SetNumberValue(item_lv2,F_PowerFactor_A);
 //    item_lv2 = cJSON_GetObjectItem(item_lv1,"Ang");
@@ -1106,6 +1106,7 @@ void metering_8110_thread_entry(void *p)
     xTaskCreate(uart_event_loop, UART_TASK_NAME, UART_TASK_STACKSIZE,
         NULL,  UART_TASK_PRIORITY, NULL);
 
+    HLW8110_init();
     vTaskDelete(NULL);
 
 }
