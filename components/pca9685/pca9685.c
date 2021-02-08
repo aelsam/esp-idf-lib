@@ -16,7 +16,8 @@
 #include <esp_system.h>
 #include <esp_log.h>
 
-#define I2C_FREQ_HZ 1000000 // 1 Mhz
+//#define I2C_FREQ_HZ 1000000 // 1 Mhz
+#define I2C_FREQ_HZ 400000 	// 400 Khz
 
 #define REG_MODE1      0x00
 #define REG_MODE2      0x01

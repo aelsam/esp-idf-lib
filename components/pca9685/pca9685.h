@@ -23,6 +23,7 @@ extern "C" {
 #endif
 
 #define PCA9685_ADDR_BASE 0x40 //!< Base I2C device address
+//#define PCA9685_ADDR_BASE 0x80 //!< Base I2C device address
 
 /**
  * PWM channel
