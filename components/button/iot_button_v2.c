@@ -101,7 +101,7 @@ static void button_handler(button_dev_t *btn)
             btn->ticks = 0;
             btn->state = 2;
 
-        } else if (btn->ticks > btn->long_press_time) {
+        } else if (btn->ticks > (btn->long_press_time/TICKS_INTERVAL)) {
             btn->event = (uint8_t)BUTTON_LONG_PRESS_START;
             CALL_EVENT_CB(BUTTON_LONG_PRESS_START);
             btn->state = 5;
