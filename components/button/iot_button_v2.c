@@ -147,10 +147,12 @@ static void button_handler(button_dev_t *btn)
             //continue hold trigger
             btn->event = (uint8_t)BUTTON_LONG_PRESS_HOLD;
             CALL_EVENT_CB(BUTTON_LONG_PRESS_HOLD);
+            
         } else { //releasd
             btn->event = (uint8_t)BUTTON_PRESS_UP;
             CALL_EVENT_CB(BUTTON_PRESS_UP);
             btn->state = 0; //reset
+
         }
         break;
     }
