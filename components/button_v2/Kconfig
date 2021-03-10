@@ -1,4 +1,4 @@
-menu "IoT Button"
+menu "IoT Button v2"
     
     config BUTTON_PERIOD_TIME_MS
         int "BUTTON PERIOD TIME (MS)"

@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#ifndef _IOT_BUTTON_H_
-#define _IOT_BUTTON_H_
+#ifndef _IOT_BUTTON_V2_H_
+#define _IOT_BUTTON_V2_H_
 
 #include "button_adc.h"
 #include "button_gpio.h"
