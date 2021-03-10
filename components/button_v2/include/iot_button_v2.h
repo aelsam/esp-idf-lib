@@ -21,8 +21,8 @@
 extern "C" {
 #endif
 
-typedef void (* button_cb_t)(void *);
-typedef void *button_handle_t;
+typedef void (* button_v2_cb_t)(void *);
+typedef void *button_v2_handle_t;
 
 /**
  * @brief Button events
@@ -38,7 +38,7 @@ typedef enum {
     BUTTON_LONG_PRESS_HOLD,
     BUTTON_EVENT_MAX,
     BUTTON_NONE_PRESS,
-} button_event_t;
+} button_v2_event_t;
 
 /**
  * @brief Supported button type
@@ -47,19 +47,19 @@ typedef enum {
 typedef enum {
     BUTTON_TYPE_GPIO,
     BUTTON_TYPE_ADC,
-} button_type_t;
+} button_v2_type_t;
 
 /**
  * @brief Button configuration
  *
  */
 typedef struct {
-    button_type_t type;                           /**< button type, The corresponding button configuration must be filled */
+    button_v2_type_t type;                           /**< button type, The corresponding button configuration must be filled */
     union {
         button_gpio_config_t gpio_button_config; /**< gpio button configuration */
         button_adc_config_t adc_button_config;   /**< adc button configuration */
     }; /**< button configuration */
-} button_config_t;
+} button_v2_config_t;
 
 /**
  * @brief Create a button
@@ -68,7 +68,7 @@ typedef struct {
  *
  * @return A handle to the created button, or NULL in case of error.
  */
-button_handle_t iot_button_create(const button_config_t *config);
+button_v2_handle_t iot_button_v2_create(const button_v2_config_t *config);
 
 /**
  * @brief Delete a button
@@ -79,7 +79,7 @@ button_handle_t iot_button_create(const button_config_t *config);
  *      - ESP_OK  Success
  *      - ESP_FAIL Failure
  */
-esp_err_t iot_button_delete(button_handle_t btn_handle);
+esp_err_t iot_button_v2_delete(button_v2_handle_t btn_handle);
 
 /**
  * @brief Register the button event callback function.
@@ -92,7 +92,7 @@ esp_err_t iot_button_delete(button_handle_t btn_handle);
  *      - ESP_OK on success
  *      - ESP_ERR_INVALID_ARG   Arguments is invalid.
  */
-esp_err_t iot_button_register_cb(button_handle_t btn_handle, button_event_t event, button_cb_t cb);
+esp_err_t iot_button_v2_register_cb(button_v2_handle_t btn_handle, button_v2_event_t event, button_v2_cb_t cb);
 
 /**
  * @brief Unregister the button event callback function.
@@ -104,7 +104,7 @@ esp_err_t iot_button_register_cb(button_handle_t btn_handle, button_event_t even
  *      - ESP_OK on success
  *      - ESP_ERR_INVALID_ARG   Arguments is invalid.
  */
-esp_err_t iot_button_unregister_cb(button_handle_t btn_handle, button_event_t event);
+esp_err_t iot_button_v2_unregister_cb(button_v2_handle_t btn_handle, button_v2_event_t event);
 
 /**
  * @brief Get button event
@@ -113,7 +113,7 @@ esp_err_t iot_button_unregister_cb(button_handle_t btn_handle, button_event_t ev
  *
  * @return Current button event. See button_event_t
  */
-button_event_t iot_button_get_event(button_handle_t btn_handle);
+button_v2_event_t iot_button_v2_get_event(button_v2_handle_t btn_handle);
 
 /**
  * @brief Get button repeat times
@@ -122,7 +122,7 @@ button_event_t iot_button_get_event(button_handle_t btn_handle);
  *
  * @return button pressed times. For example, double-click return 2, triple-click return 3, etc.
  */
-uint8_t iot_button_get_repeat(button_handle_t btn_handle);
+uint8_t iot_button_v2_get_repeat(button_v2_handle_t btn_handle);
 
 #ifdef __cplusplus
 }

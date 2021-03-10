@@ -22,7 +22,7 @@
 #include "esp_timer.h"
 #include "sdkconfig.h"
 
-static const char *TAG = "button";
+static const char *TAG = "button_v2";
 
 #define BTN_CHECK(a, str, ret_val)                          \
     if (!(a))                                                     \
@@ -34,7 +34,7 @@ static const char *TAG = "button";
 typedef struct Button {
     uint16_t        ticks;
     uint8_t         repeat;
-    button_event_t  event;
+    button_v2_event_t  event;
     uint8_t         state: 3;
     uint8_t         debounce_cnt: 3;
     uint8_t         active_level: 1;
@@ -42,8 +42,8 @@ typedef struct Button {
     uint8_t         (*hal_button_Level)(void *usr_data);
     void            *usr_data;
     uint32_t long_press_time; // ms
-    button_type_t   type;
-    button_cb_t     cb[BUTTON_EVENT_MAX];
+    button_v2_type_t   type;
+    button_v2_cb_t     cb[BUTTON_EVENT_MAX];
     struct Button   *next;
 } button_dev_t;
 
@@ -61,7 +61,7 @@ static bool g_is_timer_running = false;
 /**
   * @brief  Button driver core function, driver state machine.
   */
-static void button_handler(button_dev_t *btn)
+static void button_v2_handler(button_dev_t *btn)
 {
     uint8_t read_gpio_level = btn->hal_button_Level(btn->usr_data);
 
@@ -158,15 +158,15 @@ static void button_handler(button_dev_t *btn)
     }
 }
 
-static void button_cb(void *args)
+static void button_v2_cb(void *args)
 {
     button_dev_t *target;
     for (target = g_head_handle; target; target = target->next) {
-        button_handler(target);
+        button_v2_handler(target);
     }
 }
 
-static button_dev_t *button_create_com(uint8_t active_level, uint8_t (*hal_get_key_state)(void *usr_data), void *usr_data)
+static button_dev_t *button_v2_create_com(uint8_t active_level, uint8_t (*hal_get_key_state)(void *usr_data), void *usr_data)
 {
     BTN_CHECK(NULL != hal_get_key_state, "Function pointer is invalid", NULL);
 
@@ -185,7 +185,7 @@ static button_dev_t *button_create_com(uint8_t active_level, uint8_t (*hal_get_k
     if (false == g_is_timer_running) {
         esp_timer_create_args_t button_timer;
         button_timer.arg = NULL;
-        button_timer.callback = button_cb;
+        button_timer.callback = button_v2_cb;
         button_timer.dispatch_method = ESP_TIMER_TASK;
         button_timer.name = "button_timer";
         esp_timer_create(&button_timer, &g_button_timer_handle);
@@ -196,7 +196,7 @@ static button_dev_t *button_create_com(uint8_t active_level, uint8_t (*hal_get_k
     return btn;
 }
 
-static esp_err_t button_delete_com(button_dev_t *btn)
+static esp_err_t button_v2_delete_com(button_dev_t *btn)
 {
     BTN_CHECK(NULL != btn, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
 
@@ -228,7 +228,7 @@ static esp_err_t button_delete_com(button_dev_t *btn)
     return ESP_OK;
 }
 
-button_handle_t iot_button_create(const button_config_t *config)
+button_v2_handle_t iot_button_v2_create(const button_v2_config_t *config)
 {
     esp_err_t ret = ESP_OK;
     button_dev_t *btn = NULL;
@@ -237,14 +237,14 @@ button_handle_t iot_button_create(const button_config_t *config)
         const button_gpio_config_t *cfg = &(config->gpio_button_config);
         ret = button_gpio_init(cfg);
         BTN_CHECK(ESP_OK == ret, "gpio button init failed", NULL);
-        btn = button_create_com(cfg->active_level, button_gpio_get_key_level, (void *)cfg->gpio_num);
+        btn = button_v2_create_com(cfg->active_level, button_gpio_get_key_level, (void *)cfg->gpio_num);
         btn->long_press_time=cfg->longpresstime;
     } break;
     case BUTTON_TYPE_ADC: {
         const button_adc_config_t *cfg = &(config->adc_button_config);
         ret = button_adc_init(cfg);
         BTN_CHECK(ESP_OK == ret, "adc button init failed", NULL);
-        btn = button_create_com(1, button_adc_get_key_level, (void *)ADC_BUTTON_COMBINE(cfg->adc_channel, cfg->button_index));
+        btn = button_v2_create_com(1, button_adc_get_key_level, (void *)ADC_BUTTON_COMBINE(cfg->adc_channel, cfg->button_index));
     } break;
 
     default:
@@ -253,10 +253,10 @@ button_handle_t iot_button_create(const button_config_t *config)
     }
     BTN_CHECK(NULL != btn, "button create failed", NULL);
     btn->type = config->type;
-    return (button_handle_t)btn;
+    return (button_v2_handle_t)btn;
 }
 
-esp_err_t iot_button_delete(button_handle_t btn_handle)
+esp_err_t iot_button_v2_delete(button_v2_handle_t btn_handle)
 {
     esp_err_t ret = ESP_OK;
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
@@ -272,11 +272,11 @@ esp_err_t iot_button_delete(button_handle_t btn_handle)
         break;
     }
     BTN_CHECK(ESP_OK == ret, "button deinit failed", ESP_FAIL);
-    button_delete_com(btn);
+    button_v2_delete_com(btn);
     return ESP_OK;
 }
 
-esp_err_t iot_button_register_cb(button_handle_t btn_handle, button_event_t event, button_cb_t cb)
+esp_err_t iot_button_v2_register_cb(button_v2_handle_t btn_handle, button_v2_event_t event, button_v2_cb_t cb)
 {
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
     BTN_CHECK(event < BUTTON_EVENT_MAX, "event is invalid", ESP_ERR_INVALID_ARG);
@@ -285,7 +285,7 @@ esp_err_t iot_button_register_cb(button_handle_t btn_handle, button_event_t even
     return ESP_OK;
 }
 
-esp_err_t iot_button_unregister_cb(button_handle_t btn_handle, button_event_t event)
+esp_err_t iot_button_v2_unregister_cb(button_v2_handle_t btn_handle, button_v2_event_t event)
 {
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", ESP_ERR_INVALID_ARG);
     BTN_CHECK(event < BUTTON_EVENT_MAX, "event is invalid", ESP_ERR_INVALID_ARG);
@@ -294,14 +294,14 @@ esp_err_t iot_button_unregister_cb(button_handle_t btn_handle, button_event_t ev
     return ESP_OK;
 }
 
-button_event_t iot_button_get_event(button_handle_t btn_handle)
+button_v2_event_t iot_button_v2_get_event(button_v2_handle_t btn_handle)
 {
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", BUTTON_NONE_PRESS);
     button_dev_t *btn = (button_dev_t *) btn_handle;
     return btn->event;
 }
 
-uint8_t iot_button_get_repeat(button_handle_t btn_handle)
+uint8_t iot_button_v2_get_repeat(button_v2_handle_t btn_handle)
 {
     BTN_CHECK(NULL != btn_handle, "Pointer of handle is invalid", 0);
     button_dev_t *btn = (button_dev_t *) btn_handle;
