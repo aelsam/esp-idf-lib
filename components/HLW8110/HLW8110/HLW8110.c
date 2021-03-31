@@ -1,6 +1,6 @@
 /*==========================================================
   * File Name	 : HLW8110.c
-  * Describe 	 : HLW8110 UART Í¨Ñ¶³ÌÐò,Ê¹ÓÃUSATR2
+  * Describe 	 : HLW8110 UART Í¨Ñ¶ï¿½ï¿½ï¿½ï¿½,Ê¹ï¿½ï¿½USATR2
   * Author	     : Tuqiang
   * Version	     : V1.2
   * Record	     : 2019/04/16
@@ -86,48 +86,48 @@ esp_err_t err;
 //---------------------------------------------------------
 unsigned int    U16_SYSCON_RegData;
 unsigned int    U16_EMUCON2_RegData;
-unsigned int    U16_HFConst_RegData;            //HFCONST¼Ä´æÆ÷Öµ
-unsigned int    U16_RMSUC_RegData;            //µçÑ¹ÏµÊý
-unsigned long   U32_RMSU_RegData;             //UÍ¨µÀµçÑ¹¼Ä´æÆ÷ 
-unsigned int    U16_PowerSC_RegData;          //ÊÓÔÚ¹¦ÂÊ×ª»»ÏµÊý,Èç¹ûÑ¡ÔñAÍ¨µÀ£¬ÔòÊÇAÍ¨µÀÊÓÔÚ¹¦ÂÊ×ª»»ÏµÊý¡£AºÍBÍ¨µÀÖ»ÄÜ¶þÕßÑ¡ÆäÒ»
-/*---------------------AÍ¨µÀ-------------------------------*/
-unsigned int    U16_RMSIAC_RegData;           //AÍ¨µÀµçÁ÷ÏµÊý   
-unsigned int    U16_PowerPAC_RegData;         //AÍ¨µÀ¹¦ÂÊÏµÊý   
-unsigned int    U16_EnergyAC_RegData;         //AÍ¨µÀµçÁ¿ÏµÊý   
-unsigned long   U32_RMSIA_RegData;            //AÍ¨µÀµçÁ÷¼Ä´æÆ÷ÓÐÐ§Öµ
-unsigned long   U32_POWERPA_RegData;          //AÍ¨µÀ¹¦ÂÊ¼Ä´æÆ÷ÓÐÐ§Öµ 
-unsigned long   U32_ENERGY_PA_RegData;        //AÍ¨µÀÓÐ¹¦µçÄÜ(Á¿)¼Ä´æÆ÷ÓÐÐ§Öµ 
-/*---------------------BÍ¨µÀ-------------------------------*/
-unsigned int    U16_RMSIBC_RegData;           //BÍ¨µÀµçÁ÷ÏµÊý,HLW8110Ó²¼þÉÏÃ»ÓÐ£¬µ«¼Ä´æÆ÷´æÔÚ 
-unsigned int    U16_PowerPBC_RegData;         //BÍ¨µÀ¹¦ÂÊÏµÊý,HLW8110Ó²¼þÉÏÃ»ÓÐ£¬µ«¼Ä´æÆ÷´æÔÚ 
-unsigned int    U16_EnergyBC_RegData;         //BÍ¨µÀµçÁ¿ÏµÊý,,HLW8110Ó²¼þÉÏÃ»ÓÐ£¬µ«¼Ä´æÆ÷´æÔÚ
-unsigned long   U32_ENERGY_PB_RegData;        //AÍ¨µÀÓÐ¹¦µçÄÜ(Á¿)¼Ä´æÆ÷ÓÐÐ§Öµ 
+unsigned int    U16_HFConst_RegData;            //HFCONSTï¿½Ä´ï¿½ï¿½ï¿½Öµ
+unsigned int    U16_RMSUC_RegData;            //ï¿½ï¿½Ñ¹Ïµï¿½ï¿½
+unsigned long   U32_RMSU_RegData;             //UÍ¨ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½Ä´ï¿½ï¿½ï¿½ 
+unsigned int    U16_PowerSC_RegData;          //ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½×ªï¿½ï¿½Ïµï¿½ï¿½,ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½×ªï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½BÍ¨ï¿½ï¿½Ö»ï¿½Ü¶ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»
+/*---------------------AÍ¨ï¿½ï¿½-------------------------------*/
+unsigned int    U16_RMSIAC_RegData;           //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½   
+unsigned int    U16_PowerPAC_RegData;         //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½   
+unsigned int    U16_EnergyAC_RegData;         //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½   
+unsigned long   U32_RMSIA_RegData;            //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Öµ
+unsigned long   U32_POWERPA_RegData;          //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Öµ 
+unsigned long   U32_ENERGY_PA_RegData;        //AÍ¨ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½)ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Öµ 
+/*---------------------BÍ¨ï¿½ï¿½-------------------------------*/
+unsigned int    U16_RMSIBC_RegData;           //BÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½,HLW8110Ó²ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+unsigned int    U16_PowerPBC_RegData;         //BÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½,HLW8110Ó²ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+unsigned int    U16_EnergyBC_RegData;         //BÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½,,HLW8110Ó²ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð£ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+unsigned long   U32_ENERGY_PB_RegData;        //AÍ¨ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½)ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Öµ 
 
 
 /*---------------------------------------------------------*/
-unsigned char	B_ReadReg_Time_EN;				//´®¿Ú¶ÁÈ¡¼Ä´æÆ÷Êý¾Ý£¬Ê±¼ä¼ÆÊýÆ÷±êÖ¾Î»£¬1--¿ªÆô¼ÆÊý£¬0--¹Ø±Õ¼ÆÊý
+unsigned char	B_ReadReg_Time_EN;				//ï¿½ï¿½ï¿½Ú¶ï¿½È¡ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾Î»ï¿½ï¿½1--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0--ï¿½Ø±Õ¼ï¿½ï¿½ï¿½
 unsigned char	B_Tx_Finish;
 unsigned char	B_Rx_Finish;
-unsigned char	B_Rx_Data_ING;					//½ÓÊÕÊý¾Ý±êÖ¾Î»	,		< 1:½ÓÊÕÊý¾ÝÖÐ,0:Î´½ÓÊÕµ½Êý¾Ý >
-unsigned char	B_Read_Error;					//UART¶ÁÈ¡³ö¾ÝÐ£ÑéºÍ³ö´í,< 1:Êý¾Ý¶Á´í£¬0:Êý¾Ý¶ÁÈ¡ÕýÈ· >
+unsigned char	B_Rx_Data_ING;					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½Ö¾Î»	,		< 1:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,0:Î´ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ >
+unsigned char	B_Read_Error;					//UARTï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½Í³ï¿½ï¿½ï¿½,< 1:ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½0:ï¿½ï¿½ï¿½Ý¶ï¿½È¡ï¿½ï¿½È· >
 unsigned char	u8_TxBuf[32]; 
 unsigned char	u8_RxBuf[32];
 unsigned char	u8_TX_Length;
 unsigned char	u8_RX_Length;
 unsigned char	u8_RX_Index;
 unsigned char	u8_ReadReg_Index;
-unsigned char	u8_ReadReg_Time;				//´®¿Ú¶ÁÈ¡¼Ä´æÆ÷Êý¾ÝµÄÊ±¼ä
+unsigned char	u8_ReadReg_Time;				//ï¿½ï¿½ï¿½Ú¶ï¿½È¡ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Ê±ï¿½ï¿½
 
-float   U32_AC_V;                               //µçÑ¹ÖµÓÐÐ§Öµ
-float   U32_AC_I_A;                       //AÍ¨µÀµçÁ÷ÓÐÐ§Öµ
-float   U32_AC_P_A;                               //AÍ¨µÀÓÐ¹¦¹¦ÂÊ
-float   U32_AC_E_A;                       //AÍ¨µÀÓÐ¹¦µçÄÜ(Á¿)
-float   U32_AC_BACKUP_E_A;                //AÍ¨µÀµçÁ¿±¸·Ý   
-float   U8_AC_PF_A;                       //¹¦ÂÊÒòËØ£¬AÍ¨µÀºÍBÍ¨µÀÖ»ÄÜÑ¡ÆäÒ» 
+float   U32_AC_V;                               //ï¿½ï¿½Ñ¹Öµï¿½ï¿½Ð§Öµ
+float   U32_AC_I_A;                       //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§Öµ
+float   U32_AC_P_A;                               //AÍ¨ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½
+float   U32_AC_E_A;                       //AÍ¨ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½)
+float   U32_AC_BACKUP_E_A;                //AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   
+float   U8_AC_PF_A;                       //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½BÍ¨ï¿½ï¿½Ö»ï¿½ï¿½Ñ¡ï¿½ï¿½Ò» 
 float   U8_Angle_A;
 
-float   U16_AC_LINE_Freq;               //ÊÐµçÏßÐÔÆµÂÊ
-float   U16_IF_RegData;                 //IF¼Ä´æÆ÷Öµ
+float   U16_AC_LINE_Freq;               //ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½
+float   U16_IF_RegData;                 //IFï¿½Ä´ï¿½ï¿½ï¿½Öµ
 
 unsigned long u32_Measuring_Counter=0;
 
@@ -157,7 +157,7 @@ void uart_init() {
 }
 /*==========================================================
  * Function : void Start_Send_UartData(unsigned char len)
- * Describe : UART2´®¿Ú·¢ËÍÊý¾Ý
+ * Describe : UART2ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -240,6 +240,9 @@ void uart_event_loop()
         {
             ESP_LOGI(TAG, "nothing in queue");
         }
+
+        vTaskDelay(50 / portTICK_PERIOD_MS);	// 50ms OK
+//        vTaskDelay(30 / portTICK_PERIOD_MS);	// ms
     }
     free(dtmp);
     dtmp = NULL;
@@ -247,7 +250,7 @@ void uart_event_loop()
 }
 /*==========================================================
  * Function : void Clear_RxBuf(void)
- * Describe : ÔÚ×¼±¸½ÓÊÕ´®¿ÚÊý¾ÝÇ°£¬Çå¿Õ½ÓÊÕ»º´æÆ÷µÄÊý¾Ý
+ * Describe : ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -310,7 +313,7 @@ void Uart_HLW8110_Reset(void)
 
 /*=====================================================
  * Function : void Uart_IO_Reset(void)
- * Describe : ¸´Î»UART¿Ú
+ * Describe : ï¿½ï¿½Î»UARTï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -339,15 +342,15 @@ void Uart_Read_HLW8110_Reg(unsigned char ADDR_Reg,unsigned char u8_reg_length)
     u8_TxBuf[0] = 0xa5;
     u8_TxBuf[1] = ADDR_Reg;
     u8_TX_Length =  2;
-    u8_RX_Length = u8_reg_length + 1;   // +1 ÊÇ×îºóÓÐÒ»¸öÐ£ÑéºÍ
+    u8_RX_Length = u8_reg_length + 1;   // +1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ð£ï¿½ï¿½ï¿½
     
     
-    Clear_RxBuf();  //Çå¿Õ½ÓÊÕ»º³åÇø
+    Clear_RxBuf();  //ï¿½ï¿½Õ½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½
     Start_Send_UartData(u8_TX_Length);
 }
 /*=====================================================
  * Function : void Uart_Write_HLW8110_Reg(unsigned char ADDR_Reg,unsigned char u8_reg_length,unsigned long u32_data)
- * Describe : Ð´¼Ä´æÆ÷ÃüÁî£¬u8_reg_length£ºÐ´ÈëµÄ¼Ä´æÆ÷Êý¾Ý×Ö½Ú³¤¶È
+ * Describe : Ð´ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬u8_reg_lengthï¿½ï¿½Ð´ï¿½ï¿½Ä¼Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½Ú³ï¿½ï¿½ï¿½
  * Input    : 
  * Output   : 
  * Return   : 
@@ -408,7 +411,7 @@ unsigned char HLW8110_checkSum_Read(unsigned char u8_Reg_length)
 }
 /*=====================================================
  * Function : void Judge_CheckSum_HLW8110_Calfactor(void)
- * Describe : ÑéÖ¤µØÖ·0x70-0x77µØÖ·µÄÏµÊýºÍ
+ * Describe : ï¿½ï¿½Ö¤ï¿½ï¿½Ö·0x70-0x77ï¿½ï¿½Ö·ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -612,7 +615,7 @@ void Uart_HLW8110_Set_Channel_A(void)
 
 /*=====================================================
  * Function : void Read_HLW8110_IA(void)
- * Describe : ¶ÁÈ¡AÍ¨µÀµçÁ÷
+ * Describe : ï¿½ï¿½È¡AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -637,9 +640,9 @@ void Read_HLW8110_IA(void)
     }
     a = (float)U32_RMSIA_RegData;
     a = a * U16_RMSIAC_RegData;
-//   a  = a/0x1600000;                     //µçÁ÷¼ÆËã³öÀ´µÄ¸¡µãÊýµ¥Î»ÊÇmA,±ÈÈç5003.12 
-   a  = a/0x1000000;                     //µçÁ÷¼ÆËã³öÀ´µÄ¸¡µãÊýµ¥Î»ÊÇmA,±ÈÈç5003.12 
-   a = a/1000;              //×ª»»³ÉÕûÊý5003,±íÊ¾µçÁ÷5003mA
+//   a  = a/0x1600000;                     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½mA,ï¿½ï¿½ï¿½ï¿½5003.12 
+   a  = a/0x1000000;                     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½mA,ï¿½ï¿½ï¿½ï¿½5003.12 
+   a = a/1000;              //×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½5003,ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½5003mA
    U32_AC_I_A = a;
 
 }
@@ -647,7 +650,7 @@ void Read_HLW8110_IA(void)
 
 /*=====================================================
  * Function : void Read_HLW8110_U(void)
- * Describe : ¶ÁÈ¡µçÑ¹
+ * Describe : ï¿½ï¿½È¡ï¿½ï¿½Ñ¹
  * Input    : none
  * Output   : none
  * Return   : none
@@ -674,8 +677,8 @@ void Read_HLW8110_U(void)
 
     a =  (float)U32_RMSU_RegData;
     a = a*U16_RMSUC_RegData;  
- //   a = a/0x400000;       //µçÑ¹¼ÆËã³öÀ´µÄ¸¡µãÊýµ¥Î»ÊÇ1mV,±ÈÈç22083.12£¬±íÊ¾220.8312V
-    a = a/0x220AD0;       //µçÑ¹¼ÆËã³öÀ´µÄ¸¡µãÊýµ¥Î»ÊÇ1mV,±ÈÈç22083.12£¬±íÊ¾220.8312V
+ //   a = a/0x400000;       //ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½1mV,ï¿½ï¿½ï¿½ï¿½22083.12ï¿½ï¿½ï¿½ï¿½Ê¾220.8312V
+    a = a/0x220AD0;       //ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½1mV,ï¿½ï¿½ï¿½ï¿½22083.12ï¿½ï¿½ï¿½ï¿½Ê¾220.8312V
     a = a/100;           
     U32_AC_V = a;
 }
@@ -683,7 +686,7 @@ void Read_HLW8110_U(void)
 
 /*=====================================================
  * Function : void Read_HLW8110_PA(void)
- * Describe : ¶ÁÈ¡AÍ¨µÀ¹¦ÂÊ
+ * Describe : ï¿½ï¿½È¡AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -717,14 +720,14 @@ void Read_HLW8110_PA(void)
 
 
  a = a*U16_PowerPAC_RegData;
-    a = a/0x80000000;             //µ¥Î»ÎªmW,±ÈÈçËã³öÀ´5000123£¬±íÊ¾5000.123W
+    a = a/0x80000000;             //ï¿½ï¿½Î»ÎªmW,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½5000123ï¿½ï¿½ï¿½ï¿½Ê¾5000.123W
     U32_AC_P_A = a;
 
 }
 
 /*=====================================================
  * Function : void void Read_HLW8110_EA(void)
- * Describe : ¶ÁÈ¡BÍ¨µÀÓÐ¹¦µçÁ¿
+ * Describe : ï¿½ï¿½È¡BÍ¨ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -766,12 +769,12 @@ void Read_HLW8110_EA(void)
 
     a =  (float)U32_ENERGY_PA_RegData;    
     a = a*U16_EnergyAC_RegData;
-  a = a/0x20000000;             //µçÁ¿µ¥Î»ÊÇ0.001KWH,±ÈÈçËã³öÀ´ÊÇ2.002,±íÊ¾2.002KWH 
-//ÒòÎªK1ºÍK2¶¼ÊÇ1£¬ËùÒÔa/(K1*K2) = a    
+  a = a/0x20000000;             //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½0.001KWH,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2.002,ï¿½ï¿½Ê¾2.002KWH 
+//ï¿½ï¿½ÎªK1ï¿½ï¿½K2ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½a/(K1*K2) = a    
   U32_AC_E_A = a;
   
   
-  if (U32_AC_E_A >= 1)    //Ã¿¶Áµ½0.001¶Èµç¾ÍÇåÁã
+  if (U32_AC_E_A >= 1)    //Ã¿ï¿½ï¿½ï¿½ï¿½0.001ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   {
     U32_AC_BACKUP_E_A += U32_AC_E_A;
     
@@ -779,8 +782,8 @@ void Read_HLW8110_EA(void)
   //IO_HLW8110_SDI = LOW;
     Uart_HLW8110_WriteREG_EN();
 
-  //ÇåÁã REG_ENERGY_PB_ADDR¼Ä´æÆ÷
-    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x03ff);  //0x0001ÊÇEMUCON2µÄÄ¬ÈÏÖµ£¬waveEn = 1,zxEn = 1£¬AÍ¨µÀµçÁ¿¼Ä´æÆ÷£¬¶Áºó²»Çå0£¬EPA_CB = 1£»´ò¿ª¹¦ÂÊÒòËØ¼ì²â
+  //ï¿½ï¿½ï¿½ï¿½ REG_ENERGY_PB_ADDRï¿½Ä´ï¿½ï¿½ï¿½
+    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x03ff);  //0x0001ï¿½ï¿½EMUCON2ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½waveEn = 1,zxEn = 1ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½EPA_CB = 1ï¿½ï¿½ï¿½ò¿ª¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½
 
 
     vTaskDelay(50 / portTICK_PERIOD_MS);
@@ -799,11 +802,11 @@ void Read_HLW8110_EA(void)
     vTaskDelay(50 / portTICK_PERIOD_MS);
 
     U32_AC_E_A = 0;
-      //Ã¿¶Áµ½0.001¶Èµç¾ÍÇåÁã,È»ºóÔÙÉèÖÃ¶Áºó²»ÇåÁã
+      //Ã¿ï¿½ï¿½ï¿½ï¿½0.001ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-      Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x07ff);  //0x0001ÊÇEMUCON2µÄÄ¬ÈÏÖµ£¬waveEn = 1,zxEn = 1£¬AÍ¨µÀµçÁ¿¼Ä´æÆ÷£¬¶Áºó²»Çå0£¬EPA_CB = 1£»´ò¿ª¹¦ÂÊÒòËØ¼ì²â
+      Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x07ff);  //0x0001ï¿½ï¿½EMUCON2ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½waveEn = 1,zxEn = 1ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½EPA_CB = 1ï¿½ï¿½ï¿½ò¿ª¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½
       vTaskDelay(30 / portTICK_PERIOD_MS);
-      Uart_HLW8110_WriteREG_DIS();   //¹Ø±ÕÐ´8110 Reg
+      Uart_HLW8110_WriteREG_DIS();   //ï¿½Ø±ï¿½Ð´8110 Reg
       vTaskDelay(30 / portTICK_PERIOD_MS);
 
   }
@@ -814,8 +817,8 @@ void Reset_8110_Energy_A()
      //IO_HLW8110_SDI = LOW;
     Uart_HLW8110_WriteREG_EN();
 
-  //ÇåÁã REG_ENERGY_PB_ADDR¼Ä´æÆ÷
-    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x03ff);  //0x0001ÊÇEMUCON2µÄÄ¬ÈÏÖµ£¬waveEn = 1,zxEn = 1£¬AÍ¨µÀµçÁ¿¼Ä´æÆ÷£¬¶Áºó²»Çå0£¬EPA_CB = 1£»´ò¿ª¹¦ÂÊÒòËØ¼ì²â
+  //ï¿½ï¿½ï¿½ï¿½ REG_ENERGY_PB_ADDRï¿½Ä´ï¿½ï¿½ï¿½
+    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x03ff);  //0x0001ï¿½ï¿½EMUCON2ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½waveEn = 1,zxEn = 1ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½EPA_CB = 1ï¿½ï¿½ï¿½ò¿ª¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½
 
 
     vTaskDelay(20 / portTICK_PERIOD_MS);
@@ -845,18 +848,18 @@ void Reset_8110_Energy_A()
     }
 
     U32_AC_E_A = 0;
-  //Ã¿¶Áµ½0.001¶Èµç¾ÍÇåÁã,È»ºóÔÙÉèÖÃ¶Áºó²»ÇåÁã
+  //Ã¿ï¿½ï¿½ï¿½ï¿½0.001ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-  Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x07ff);  //0x0001ÊÇEMUCON2µÄÄ¬ÈÏÖµ£¬waveEn = 1,zxEn = 1£¬AÍ¨µÀµçÁ¿¼Ä´æÆ÷£¬¶Áºó²»Çå0£¬EPA_CB = 1£»´ò¿ª¹¦ÂÊÒòËØ¼ì²â
+  Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x07ff);  //0x0001ï¿½ï¿½EMUCON2ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½waveEn = 1,zxEn = 1ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½EPA_CB = 1ï¿½ï¿½ï¿½ò¿ª¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½
   vTaskDelay(20 / portTICK_PERIOD_MS);
-  Uart_HLW8110_WriteREG_DIS();   //¹Ø±ÕÐ´8110 Reg
+  Uart_HLW8110_WriteREG_DIS();   //ï¿½Ø±ï¿½Ð´8110 Reg
   vTaskDelay(20 / portTICK_PERIOD_MS);
 }
 
 
 /*=====================================================
  * Function : void Read_HLW8110_LineFreq(void)
- * Describe : ¶ÁÈ¡AÍ¨µÀµÄÏßÐÔÆµÂÊ
+ * Describe : ï¿½ï¿½È¡AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -887,7 +890,7 @@ void Read_HLW8110_LineFreq(void)
 
 /*=====================================================
  * Function : void Read_HLW8110_PF(void)
- * Describe : ¶ÁÈ¡¹¦ÂÊÒòËØ
+ * Describe : ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -899,8 +902,8 @@ float Read_HLW8110_PF(void)
   unsigned long b=0;
   float F_PowerFactor=0;
 
-//²âÁ¿AÍ¨µÀµÄ¹¦ÂÊÒòËØ£¬ÐèÒª·¢ËÍEA+5AÃüÁî
-//²âÁ¿BÍ¨µÀµÄ¹¦ÂÊÒòËØ£¬ÐèÒª·¢ËÍEA+A5ÃüÁî    
+//ï¿½ï¿½ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½EA+5Aï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½BÍ¨ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½EA+A5ï¿½ï¿½ï¿½ï¿½    
 
   Uart_Read_HLW8110_Reg(REG_PF_ADDR,3);
 
@@ -917,7 +920,7 @@ else
     B_Read_Error = 1;
 }
 
-  if (b>0x800000)       //Îª¸º£¬ÈÝÐÔ¸ºÔØ
+  if (b>0x800000)       //Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½
   {
       a = (float)(0xffffff-b + 1)/0x7fffff;
   }
@@ -931,7 +934,7 @@ else
   }
   
 
-//¹¦ÂÊÒòËØ*100£¬×î´óÎª100£¬×îÐ¡¸º100
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*100ï¿½ï¿½ï¿½ï¿½ï¿½Îª100ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½100
   F_PowerFactor = a;
   return F_PowerFactor;
   
@@ -940,7 +943,7 @@ else
 
 /*=====================================================
  * Function : void Read_HLW8110_Angle(void)
- * Describe : ¶ÁÈ¡ÏàÎ»½Ç
+ * Describe : ï¿½ï¿½È¡ï¿½ï¿½Î»ï¿½ï¿½
  * Input    : none
  * Output   : none
  * Return   : none
@@ -966,7 +969,7 @@ float Read_HLW8110_Angle(void)
         B_Read_Error = 1;
     }
     
-    if ( U16_AC_LINE_Freq < 55) //ÏßÐÔÆµÂÊ50HZ
+    if ( U16_AC_LINE_Freq < 55) //ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½50HZ
     {
         a = b;
         a = a * 0.0805;
@@ -974,7 +977,7 @@ float Read_HLW8110_Angle(void)
     }
     else
     {
-        //ÏßÐÔÆµÂÊ60HZ
+        //ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½60HZ
         a = b;
         a = a * 0.0965;
         F_Angle = a;
@@ -1001,33 +1004,33 @@ void HLW8110_init()
     Uart_HLW8110_WriteREG_EN();
     vTaskDelay(20 / portTICK_PERIOD_MS);
 
-//    Uart_Write_HLW8110_Reg(REG_SYSCON_ADDR,2,0x0a04);   //¿ªÆôAÍ¨µÀ£¬¹Ø±ÕBÍ¨µÀ£¬µçÑ¹Í¨µÀPGA = 1£¬µçÁ÷Í¨µÀPGA = 16
-    Uart_Write_HLW8110_Reg(REG_SYSCON_ADDR,2,0x0a04);   //¿ªÆôAÍ¨µÀ£¬¹Ø±ÕBÍ¨µÀ£¬µçÑ¹Í¨µÀPGA = 1£¬µçÁ÷Í¨µÀPGA = 16
+//    Uart_Write_HLW8110_Reg(REG_SYSCON_ADDR,2,0x0a04);   //ï¿½ï¿½ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½BÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹Í¨ï¿½ï¿½PGA = 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½PGA = 16
+    Uart_Write_HLW8110_Reg(REG_SYSCON_ADDR,2,0x0a04);   //ï¿½ï¿½ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½BÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹Í¨ï¿½ï¿½PGA = 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½PGA = 16
     vTaskDelay(20 / portTICK_PERIOD_MS);
     
-    /*------    ¹ýÁãÊä³öÉèÖÃ-------ÒÔÏÂ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
+    /*------    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Â´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
     ESP_LOGI(TAG, "Setup Counter");
-//    Uart_Write_HLW8110_Reg(REG_EMUCON_ADDR,2,0x0001);   //1£¬Ê¹ÄÜPFA Âö³åÊä³öºÍÓÐ¹¦µçÄÜ¼Ä´æÆ÷ÀÛ¼Ó£»
-    Uart_Write_HLW8110_Reg(REG_EMUCON_ADDR,2,0x0001);   //1£¬Ê¹ÄÜPFA Âö³åÊä³öºÍÓÐ¹¦µçÄÜ¼Ä´æÆ÷ÀÛ¼Ó£»
+//    Uart_Write_HLW8110_Reg(REG_EMUCON_ADDR,2,0x0001);   //1ï¿½ï¿½Ê¹ï¿½ï¿½PFA ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½Ü¼Ä´ï¿½ï¿½ï¿½ï¿½Û¼Ó£ï¿½
+    Uart_Write_HLW8110_Reg(REG_EMUCON_ADDR,2,0x0001);   //1ï¿½ï¿½Ê¹ï¿½ï¿½PFA ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½Ü¼Ä´ï¿½ï¿½ï¿½ï¿½Û¼Ó£ï¿½
 
     vTaskDelay(20 / portTICK_PERIOD_MS);
-//  Uart_Write_HLW8110_Reg(REG_EMUCON_ADDR,2,0x0018);   //ÕýÏòºÍ¸ºÏò¹ýÁãµã¾ù·¢Éú±ä»¯£¬ZXD0 = 1£¬ZXD1 = 1
+//  Uart_Write_HLW8110_Reg(REG_EMUCON_ADDR,2,0x0018);   //ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ZXD0 = 1ï¿½ï¿½ZXD1 = 1
     ESP_LOGI(TAG, "EMNUCON2 setup");
-//    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x0465);  //0x0001ÊÇEMUCON2µÄÄ¬ÈÏÖµ£¬waveEn = 1,zxEn = 1£¬AÍ¨µÀµçÁ¿¼Ä´æÆ÷£¬¶Áºó²»Çå0£¬EPA_CB = 1£»´ò¿ª¹¦ÂÊÒòËØ¼ì²â
-    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x07ff);  //0x0001ÊÇEMUCON2µÄÄ¬ÈÏÖµ£¬waveEn = 1,zxEn = 1£¬AÍ¨µÀµçÁ¿¼Ä´æÆ÷£¬¶Áºó²»Çå0£¬EPA_CB = 1£»´ò¿ª¹¦ÂÊÒòËØ¼ì²â
+//    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x0465);  //0x0001ï¿½ï¿½EMUCON2ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½waveEn = 1,zxEn = 1ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½EPA_CB = 1ï¿½ï¿½ï¿½ò¿ª¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½
+    Uart_Write_HLW8110_Reg(REG_EMUCON2_ADDR,2,0x07ff);  //0x0001ï¿½ï¿½EMUCON2ï¿½ï¿½Ä¬ï¿½ï¿½Öµï¿½ï¿½waveEn = 1,zxEn = 1ï¿½ï¿½AÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½EPA_CB = 1ï¿½ï¿½ï¿½ò¿ª¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½
 
     vTaskDelay(20 / portTICK_PERIOD_MS);
-    /*------    ¹ýÁãÊä³öÉèÖÃ-------ÒÔÉÏ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
-    /*------    ¹ýÑ¹Êä³öÉèÖÃ-------ÒÔÏÂ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
-    /*------    ¹ýÑ¹Êä³öÉèÖÃ-------ÒÔÉÏ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
-    /*------    ¹ýÁ÷Êä³öÉèÖÃ-------ÒÔÏÂ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
-    /*------    ¹ýÁ÷Êä³öÉèÖÃ-------ÒÔÉÏ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
-    /*------    ¹ýÔØÊä³öÉèÖÃ-------ÒÔÏÂ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
-    /*------    ¹ýÔØÊä³öÉèÖÃ-------ÒÔÉÏ´úÂë£¬Èç¹û²»ÐèÒª¿ÉÒÔÆÁ±Î ------*/
+    /*------    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
+    /*------    ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Â´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
+    /*------    ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
+    /*------    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Â´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
+    /*------    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
+    /*------    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Â´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
+    /*------    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-------ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------*/
     ESP_LOGI(TAG, "UART Write DIS");
     Uart_HLW8110_WriteREG_DIS();
     vTaskDelay(20 / portTICK_PERIOD_MS);
-  //¶ÁÈ¡µØÖ·ÊÇ0x6FÖÁ0x77µÄ¼Ä´æÆ÷£¬ÑéÖ¤ÏµÊýÊÇ·ñÕýÈ·
+  //ï¿½ï¿½È¡ï¿½ï¿½Ö·ï¿½ï¿½0x6Fï¿½ï¿½0x77ï¿½Ä¼Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤Ïµï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½È·
     ESP_LOGI(TAG, "Checksum Calfactor");
     Judge_CheckSum_HLW8110_Calfactor();   
 }
